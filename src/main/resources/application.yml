@@ -1,0 +1,35 @@
+server:
+  port: 9000
+
+security:
+  jwt:
+    key-store: classpath:/keystore.jks
+    key-store-password: changeit
+    key-pair-alias: keystore
+    key-pair-password: changeit
+
+spring:
+  main:
+    allow-bean-definition-overriding: true
+
+  jackson:
+    serialization:
+      fail-on-empty-beans: false
+      INDENT_OUTPUT: true
+
+  datasource:
+    url: jdbc:mysql://localhost:3306/cas
+    username: root
+    password: Ghhy@110
+
+  data:
+    mongodb:
+      host: localhost
+      port: 27017
+      database: koochita
+
+  jpa:
+    hibernate:
+      ddl-auto: update
+    properties:
+      hibernate.dialect: org.hibernate.dialect.MySQL5InnoDBDialect
