@@ -8,6 +8,15 @@ security:
     key-pair-alias: keystore
     key-pair-password: changeit
 
+logging:
+  level:
+    org:
+      springframework:
+        data:
+          mongodb:
+            core:
+              MongoTemplate: DEBUG
+
 spring:
   main:
     allow-bean-definition-overriding: true
@@ -16,11 +25,6 @@ spring:
     serialization:
       fail-on-empty-beans: false
       INDENT_OUTPUT: true
-
-  datasource:
-    url: jdbc:mysql://localhost:3306/cas
-    username: root
-    password: Ghhy@110
 
   data:
     mongodb:
@@ -31,5 +35,3 @@ spring:
   jpa:
     hibernate:
       ddl-auto: update
-    properties:
-      hibernate.dialect: org.hibernate.dialect.MySQL5InnoDBDialect

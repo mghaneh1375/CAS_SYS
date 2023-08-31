@@ -56,6 +56,8 @@ public class OAuthTokenStoreService implements TokenStore {
         token.setTokenId(SecurityUtils.extractTokenKey(accessToken.getValue()));
         token.setToken(accessToken);
         token.setAuthenticationId(authenticationKeyGenerator.extractKey(authentication));
+		System.out.println(authentication.isClientOnly());
+		System.out.println(authentication.getName());
         token.setUsername(authentication.isClientOnly() ? null : authentication.getName());
         token.setClientId(authentication.getOAuth2Request().getClientId());
         token.setAuthentication(OAuth2AuthenticationSerializationUtils.serializer(authentication));

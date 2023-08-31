@@ -31,16 +31,16 @@ public class AuthorizationServerConfiguration extends AuthorizationServerConfigu
 
     private final PasswordEncoder passwordEncoder;
     private final SecurityProperties securityProperties;
-
     private JwtAccessTokenConverter jwtAccessTokenConverter;
     private TokenStore tokenStore;
+
+    @Resource(name = "userService")
+    private UserDetailsService userDetailsService;
 
     @Autowired
     @Qualifier("authenticationManagerBean")
     private AuthenticationManager authenticationManager;
 
-    @Resource(name = "userService")
-    private UserDetailsService userDetailsService;
 
     public AuthorizationServerConfiguration(final PasswordEncoder passwordEncoder,
                                             final SecurityProperties securityProperties) {
@@ -62,8 +62,6 @@ public class AuthorizationServerConfiguration extends AuthorizationServerConfigu
                                               final ClientDetailsService clientDetailsService) {
         DefaultTokenServices tokenServices = new DefaultTokenServices();
         tokenServices.setSupportRefreshToken(true);
-        tokenServices.setAccessTokenValiditySeconds(60);
-        tokenServices.setRefreshTokenValiditySeconds(60);
         tokenServices.setTokenStore(tokenStore);
         tokenServices.setClientDetailsService(clientDetailsService);
         tokenServices.setAuthenticationManager(this.authenticationManager);
