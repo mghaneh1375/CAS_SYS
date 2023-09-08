@@ -25,7 +25,6 @@ public class UserDetailsServiceImpl implements UserDetailsService,UserService {
         this.userRepository = userRepository;
     }
 
-
     /**
      * Load user infos by credential
      *
@@ -43,9 +42,17 @@ public class UserDetailsServiceImpl implements UserDetailsService,UserService {
 
         if(user.isPresent()) {
 
-            detailsChecker.check((UserDetails) user.get());
+            User user1 = user.get();
 
-            return (UserDetails) user.get();
+            org.springframework.security.core.userdetails.User userDetails = new org.springframework.security.core.userdetails.User(
+                    user1.getUsername(), user1.getPassword(), user1.isEnabled(),
+                    user1.isAccountNonExpired(), user1.isCredentialsNonExpired(), user1.isAccountNonLocked(),
+                    user1.getAllAuthorities()
+            );
+
+            detailsChecker.check(userDetails);
+
+            return userDetails;
         } else {
             throw new UsernameNotFoundException("Invalid username or password.");
         }
