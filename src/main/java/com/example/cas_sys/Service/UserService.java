@@ -1,6 +1,6 @@
 package com.example.cas_sys.Service;
 
-import com.example.cas_sys.Model.User;
+import my.common.commonkoochita.Model.User;
 
 import java.util.Optional;
 

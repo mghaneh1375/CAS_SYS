@@ -1,7 +1,7 @@
 package com.example.cas_sys.Service;
 
-import com.example.cas_sys.Model.User;
 import com.example.cas_sys.Repository.UserRepository;
+import my.common.commonkoochita.Model.User;
 import org.apache.commons.lang3.StringUtils;
 import org.springframework.security.authentication.AccountStatusUserDetailsChecker;
 import org.springframework.security.core.userdetails.UserDetails;
@@ -41,9 +41,9 @@ public class UserDetailsServiceImpl implements UserDetailsService,UserService {
 
         if(user.isPresent()) {
 
-            detailsChecker.check(user.get());
+            detailsChecker.check((UserDetails) user.get());
 
-            return user.get();
+            return (UserDetails) user.get();
         } else {
             throw new UsernameNotFoundException("Invalid username or password.");
         }
