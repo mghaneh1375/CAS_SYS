@@ -1,7 +1,7 @@
 package com.example.cas_sys.Service;
 
+import com.example.cas_sys.Model.User;
 import com.example.cas_sys.Repository.UserRepository;
-import my.common.commonkoochita.Model.User;
 import org.apache.commons.lang3.StringUtils;
 import org.springframework.security.authentication.AccountStatusUserDetailsChecker;
 import org.springframework.security.core.userdetails.UserDetails;
@@ -35,9 +35,11 @@ public class UserDetailsServiceImpl implements UserDetailsService,UserService {
     @Override
     public UserDetails loadUserByUsername(String login) {
 
-        System.out.println(login);
+        System.out.println("loadUserByUsername");
 
         Optional<User> user = getUserByUsername(login);
+
+        System.out.println("user find is " + user.isPresent());
 
         if(user.isPresent()) {
 
@@ -52,7 +54,7 @@ public class UserDetailsServiceImpl implements UserDetailsService,UserService {
     @Override
     public Optional<User> getUserByUsername(String login) {
 
-        System.out.println(login);
+        System.out.println("getUserByUsername : " + login);
 
         // trim username value
         String username = StringUtils.trimToNull(login);
